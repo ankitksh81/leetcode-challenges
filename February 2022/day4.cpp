@@ -23,3 +23,6 @@ public:
         return maxlen;
     }
 };
+
+// Solution 2: Using Array
+
