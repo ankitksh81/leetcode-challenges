@@ -50,4 +50,43 @@ public:
     }
 };
 
-// Solution 2: 
+// Solution 2: Bucket Sort
+
+class Solution {
+public:
+    int findDistance(vector<int>& worker, vector<int>& bike) {
+        return abs(worker[0] - bike[0]) + abs(worker[1] - bike[1]);
+    }
+    
+    vector<int> assignBikes(vector<vector<int>>& workers, vector<vector<int>>& bikes) {
+        int minDist = INT_MAX;
+        vector<pair<int, int>> distToPairs[1999];
+        
+        for (int worker = 0; worker < workers.size(); worker++) {
+            for (int bike = 0; bike < bikes.size(); bike++) {
+                int distance = findDistance(workers[worker], bikes[bike]);
+                distToPairs[distance].push_back({worker, bike});
+                minDist = min(minDist, distance);
+            }
+        }
+        
+        int curDist = minDist;
+        vector<bool> bikeStatus(bikes.size(), false);
+        vector<int> workerStatus(workers.size(), -1);
+        
+        int pairCount = 0;
+        
+        while (pairCount != workers.size()) {
+            for (auto &[worker, bike] : distToPairs[curDist]) {
+                if (workerStatus[worker] == -1 && !bikeStatus[bike]) {
+                    bikeStatus[bike] = true;
+                    workerStatus[worker] = bike;
+                    pairCount++;
+                }
+            }
+            curDist++;
+        }
+        
+        return workerStatus;
+    }
+};
