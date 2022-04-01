@@ -1,0 +1,16 @@
+/*
+	Reverse String
+	https://leetcode.com/problems/reverse-string/
+*/
+
+// Solution: Two Pointers
+
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        int l = 0, r = s.size()-1;
+        while (l < r) {
+            swap(s[l++], s[r--]);
+        }
+    }
+};
