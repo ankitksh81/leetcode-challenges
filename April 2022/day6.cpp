@@ -9,10 +9,6 @@ class Solution {
 public:
     int threeSumMulti(vector<int>& arr, int target) {
         const int MOD = 1e9+7;
-        unordered_map<int, int> freq;
-        for(int x : arr) {
-            freq[x]++;
-        }
         sort(arr.begin(), arr.end());
         long ans = 0;
         
