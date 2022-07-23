@@ -3,7 +3,7 @@
 	https://leetcode.com/problems/all-paths-from-source-lead-to-destination/
 */
 
-// Solution: DFS
+// Solution: Depth First Search
 
 class Solution {
 public:
