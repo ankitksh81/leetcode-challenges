@@ -3,7 +3,7 @@
 	https://leetcode.com/problems/sort-the-matrix-diagonally/
 */
 
-// Solution: Sorting
+// Solution 1: Sorting
 
 class Solution {
 public:
@@ -40,6 +40,42 @@ public:
             vector<int> diag = getDiagonal(mat, row, 0);
             sort(diag.begin(), diag.end());
             setDiagonal(mat, diag, row, 0);
+        }
+        
+        return mat;
+    }
+};
+
+
+// Solution 2: Min Heap
+
+class Solution {
+    void sortDiagonal(int row, int col, vector<vector<int>>& mat) {
+        int m = mat.size(), n = mat[0].size();
+        priority_queue<int, vector<int>, greater<int>> diag;
+        
+        int len = min(m - row, n - col);
+        
+        for (int i = 0; i < len; i++) {
+            diag.push(mat[row + i][col + i]);
+        }
+        
+        for (int i = 0; i < len; i++) {
+            mat[row + i][col + i] = diag.top();
+            diag.pop();
+        }
+    }
+    
+public:
+    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+        int m = mat.size(), n = mat[0].size();
+        
+        for (int row = 0; row < m; row++) {
+            sortDiagonal(row, 0, mat);
+        }
+        
+        for (int col = 0; col < n; col++) {
+            sortDiagonal(0, col, mat);
         }
         
         return mat;
